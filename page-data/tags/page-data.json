@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-tags-query-tsx",
+    "path": "/tags",
+    "result": {"data":{"allPost":{"group":[{"fieldValue":"Coding","totalCount":2},{"fieldValue":"Hosting","totalCount":1},{"fieldValue":"Infrastructure","totalCount":1},{"fieldValue":"OS","totalCount":2},{"fieldValue":"Random","totalCount":1},{"fieldValue":"Reference","totalCount":2},{"fieldValue":"Standards","totalCount":1}]}},"pageContext":{}},
+    "staticQueryHashes": ["2744905544","3090400250","318001574"]}

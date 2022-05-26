@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-tag-query-tsx",
+    "path": "/tags/os",
+    "result": {"data":{"allPost":{"nodes":[{"slug":"/forced-windows-update-blocker","title":"Forced Windows Update Blocker","date":"19.07.2018","excerpt":"Enough with the rant, let's do something about it! In my previous blog I wrote about my latest misadventure with Windows update. I decided…","timeToRead":2,"description":null,"tags":[{"name":"OS","slug":"os"}]},{"slug":"/forced-windows-updates","title":"Forced Windows Updates","date":"06.07.2018","excerpt":"Rant about Windows 10 and forced Windows updates. Ever since Windows 10 was released, Microsoft took away the option to turn off \nWindows…","timeToRead":1,"description":null,"tags":[{"name":"OS","slug":"os"}]}]}},"pageContext":{"slug":"os","name":"OS","formatString":"DD.MM.YYYY"}},
+    "staticQueryHashes": ["2744905544","3090400250","318001574"]}

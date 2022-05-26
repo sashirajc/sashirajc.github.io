@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-tag-query-tsx",
+    "path": "/tags/infrastructure",
+    "result": {"data":{"allPost":{"nodes":[{"slug":"/aws-best-practices","title":"AWS Best Practices","date":"11.10.2018","excerpt":"Overview of Best Practices on AWS. Collection of articles from multiple places. Best Practices Whitepapers AWS Architecting for the Cloud…","timeToRead":11,"description":"Best Practices for AWS Services","tags":[{"name":"Infrastructure","slug":"infrastructure"}]}]}},"pageContext":{"slug":"infrastructure","name":"Infrastructure","formatString":"DD.MM.YYYY"}},
+    "staticQueryHashes": ["2744905544","3090400250","318001574"]}

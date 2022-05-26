@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-tag-query-tsx",
+    "path": "/tags/hosting",
+    "result": {"data":{"allPost":{"nodes":[{"slug":"/nginx","title":"Nginx","date":"24.11.2018","excerpt":"An overview of Nginx web server. Analysis of the trade-offs between Apache and Nginx.Basic configurations to setup Nginx! Nginx Overview…","timeToRead":3,"description":"Nginx guide","tags":[{"name":"Hosting","slug":"hosting"}]}]}},"pageContext":{"slug":"hosting","name":"Hosting","formatString":"DD.MM.YYYY"}},
+    "staticQueryHashes": ["2744905544","3090400250","318001574"]}

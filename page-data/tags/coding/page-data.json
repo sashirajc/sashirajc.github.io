@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-tag-query-tsx",
+    "path": "/tags/coding",
+    "result": {"data":{"allPost":{"nodes":[{"slug":"/api-best-practices","title":"API Best Practices","date":"17.07.2018","excerpt":"Curious to know what to keep in mind while designing new APIs? Here is a quick reference of the most common API best practices! Over the…","timeToRead":3,"description":null,"tags":[{"name":"Coding","slug":"coding"}]},{"slug":"/xml-to-json-converter","title":"XML to JSON Converter","date":"19.02.2018","excerpt":"XML to JSON converter I recently came across this problem while designing my backend NodeJS application using Loopback framework. One of the…","timeToRead":1,"description":null,"tags":[{"name":"Coding","slug":"coding"}]}]}},"pageContext":{"slug":"coding","name":"Coding","formatString":"DD.MM.YYYY"}},
+    "staticQueryHashes": ["2744905544","3090400250","318001574"]}
