@@ -1,0 +1,75 @@
+---
+title: API Best Practices
+date: 2018-07-17
+tags:
+  - Coding
+---
+
+
+Curious to know what to keep in mind while designing new APIs? Here is a quick reference of the most common API best practices!
+<!--more-->
+Over the past few months, I have exclusively worked on designing APIs on NodeJS (Express and Loopback frameworks). Here are some of the best practices that needs to be followed while designing APIs irrespective of which language you are developing it on.
+
+1. **Use Versioning**
+
+    Creating a new API every time you have an update with breaking changes on an existing API is confusing and inefficient for the consumers of your API. Adding version numbers makes it easier to introduce breaking changes to the API without affecting the consumers. This would also give the consumers enough time to switch to the latest APIs at their own convenience and delinks the API update from the end-user update.
+
+2. **Use Correct HTTP Codes**
+
+    It is important for the end user to know if the API call was successful or if something went wrong with the API call or the response. Always communicate to the end-user the outcome of their API call by using the correct HTTP code. [Full list of HTTP Codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes).
+
+3. **Use JSON**
+
+    JSON has become the de facto standard to exchange data between different APIs. Unless you are building something for a legacy application, use JSON. It is easier to read, easier to parse and works with JS which means it can be used everywhere.
+
+4. **Use Correct HTTP Method - GET/POST/PUT/DELETE**
+
+    The first APIs I created used POST irrespective of what the API was doing. I told myself that using POST is more secure compared to GET. But unless you use HTTPS nothing is really secure. So use the correct HTTP method to make it clear to the end user what the API is expected to do.
+
+5. **Return Proper error messages**
+
+    This is one of the most important things to consider while designing APIs. It is not sufficiant to provide a 400 error message. Error codes must always be backed up by well-written error messages which clearly communicate to the user what caused the error and how to avoid it. At the same time, avoid sending the actual error message through the API response. At times, it could contain information about your architecture or other systems which could be dangerous in the hands of a bad actor. Always write your own custom messages which are descriptive and convey to the end-user what actually went wrong without exposing the internal workings of your system. 
+
+6. **Paginate your response**
+
+    Pagination doesn't seem like a big deal until you have to make an API which could return a thousand items on the API response. A front-end device usually does not need to display more than ten items at a time. Use start, skip as ways to control how many items must be returned. Let the front-end device control how many items it wants. Also, a field to indicate how many total items are available would be often helpful to let the consumer know when to stop calling the API.
+
+7. **Authentication**
+
+    While it is good to make the API available for the open world, it is also important to protect yourselves from frequent API calls and other attacks. Using some form of authentication will help in identifying who is calling your API and protecting yourself from bad actors.
+
+8. **Provide good documentation**
+
+    Nobody likes to deal with poorly documented API. The whole point of a creating an API is lost if you do not create clear documentation on how to use the APIs and make it easily accessible to the consumer.
+
+9. **Use two URLs per resource - like '/users/' and '/users/1'**
+
+   This is exceptionally handy when you need to grab all items of a resource and when you need to grab a specific item of a resource.
+
+10. **Use nouns instead of verbs**
+
+    There are no clear technical benefits to use nouns instead of verbs other than that it is the convention and following convention is often easier for all the developers who are using your API.
+
+11. **Use HTTP verbs to describe what the API would do**
+
+    Since our previous point makes sure that we wouldn't be including verbs in our URL, it makes sense to use the HTTP verbs to indicate what the API is expected to do. Is it going to 'get' something from the API/server/database or post something to the API/server/database?
+
+12. **Use POST for creating new resources**
+
+    Always use POST for creating new resources. That is the intended purpose of POST.
+
+13. **Use PUT for updating existing resources**
+
+    Always use PUT for updating existing resources. This is to avoid confusion on whether a request is creating a new resource or updating an existing resource.
+
+14. **Use Query string for complex queries**
+
+    Complex queries can often be broken down to their base resources and query strings used to pass in parameters to filter the API response. Pagination, filtering, sorting can all be done very easily using query strings.
+
+15. **Use camelcase for attributes**
+
+    camelCase is easier to read for most people. Use it!
+
+16. **Validate all input data**
+
+    Never trust data that is sent to your API. Sanitise and validate them to ensure that it is in the format you expect and there aren't any funny inputs.

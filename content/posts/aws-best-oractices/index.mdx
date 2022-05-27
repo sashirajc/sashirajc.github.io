@@ -1,0 +1,474 @@
+---
+title: AWS Best Practices
+date: 2018-10-11
+description: Best Practices for AWS Services
+tags:
+  - Infrastructure
+---
+Overview of Best Practices on AWS. Collection of articles from multiple places.
+
+## Best Practices
+
+Whitepapers
+
+1. [AWS Architecting for the Cloud: Best Practices](../resources/AWS_CBP.pdf)
+
+2. [AWS Well Architected Framework](../resources/AWS_WAF.pdf)
+
+#### Business benefits of cloud
+
+1. Almost zero upfront infrastructure investment
+
+2. Just-in-time infrastructure
+
+3. More efficient resource utilization
+
+4. Usage-based costing
+
+5. Reduced time to market
+
+#### Technical benefits of cloud
+
+1. Automation - "Scriptable infrastructure"
+
+2. Autoscaling
+
+3. Proactive Scaling
+
+4. More efficient development lifecycle (CI/CD)
+
+5. Improved Testability (Testing and development environments which are completely separate)
+
+6. Disaster Recovery and Business Continuity
+
+7. "Overflow" traffic to the cloud (Cloud can enhance on-prem resources)
+
+#### Design for failure
+
+Rule of thumb: Be a pessimist when designing architectures in the cloud; assume things will fail.  Assume hardware will fail. Assume outages will occue. Assume some disaster will strike your application. Assume that you will be slammed with more than the expected number of requests per second. ASsume that with time your application software will fail too. Always design, implement and deploy for automated recovery from failure. By being pessimistic, a better recovery strategy is devised right from design time, which helps in designing an overall system better.
+
+#### Decouple Components
+
+Build components that do not have tight dependencies on each other, so if one component dies or is busy, the other components in the system are built so as to continue to work as if no failure is happening.
+
+Loose coupling isolates the various layers and components of the application so each component interacts asynchronously with others and treat them as 'black box'.
+
+#### Implement Elasticity
+
+1. Proactive Cyclic Scaling: Periodic scaling that occurs at fixed interval (daily, weekly, monthly, quarterly)
+
+2. Proactive Event Scaling: Scaling just when you are expecting a big surge of traffic requests based on a scheduled business event such as product launches, marketing campaigns etc.
+
+3. Autoscaling based on demand: Use a monitoring service, your system can send triggers to take appropriate actions so that it scales up or down based on metrics such as CPU utilization, network io etc
+
+## Well Architected Framework
+
+The well architected framework is a set of questions that can be used to evaluate how well your architecture is aligned to AWS best practices.
+
+#### General Design Principles
+
+1. Stop guessing capacity needs - Scale as and when it is needed.
+
+2. Test systems at production scale - Use Cloudformation to replicate production environment in a test setting
+
+3. Automate to make architectural experimentation easier - Use Cloudformation
+
+4. Allow for evolutionary architectures - Business changes continously and architecture should have the provision to change and update (since this is easier to do on the cloud).
+
+5. Data-Driven architecture - Log everything on Cloudwatch to see how the architecture impacts performance and remove bottlenecks in architecture.
+
+6. Improve through game days - Simulate events like new year sale in a test environment to prepare production environment better
+
+### Pillar 1: Security
+
+#### Design Principles
+
+1. Always apply security at all layers (Not just on firewall level) - Security should be on subnets, firewalls, security groups, ACLs and on the instances themselves.
+
+2. Enable traceability - If a hacker or malicious actor is in the picture, all their actions should be traceable.
+
+3. Automate responses to security events - If someone is trying to brute force SSH then it should trigger a SNS notification.
+
+4. Focus on securing the system - Secure data, application and operating system
+
+5. Automate security best practices - Use Center for Internet Security as a guide on how to harden operating systems and create an AMI. Use this AMI with security settings for all EC2 instances.
+
+6. Shared security model - Customer is responsible for IAM access policies, firewall config, instance hardening, server side and client side encryption etc.
+
+AWS will be responsible for data center security, applying software patches to cloud resources and maintaining availability and reliability of the resources as per the SLAs.
+
+#### Definition
+
+Security in the cloud consists of 4 areas:
+
+1. Data Protection: Basic data classification should be in place. Data should be organised and classified into segments such as publicly available, available only to members of organisation, available only to certain members of the organisation, available only to the board etc.
+
+Least privilege access system must be implemented so that people are only able to access what they need. All data must be encrypted whenever possible, in transit or at rest.
+
+2. Privilege Management
+
+Privilege management ensures that only authorized and authenticated users are able to access your resources and only in a manner that is intended. It can include using Access Control Lists, Role based access controls and password management.
+
+3. Infrastructure Protection
+
+Outside of Cloud, how would you protect your data center? RFID controls, security cameras, lockable cabinets etc. Within AWS they handle this, so really infrastructure protection exists at a VPC level. How are you managing ACLs? How is the routing done? Are the subnets public or private?
+
+4. Detective Controls
+
+Detective controls can be used to detect or identify a security breach. AWS services to achieve this include - CloudTrail, CloudWatch, Config, S3, Glacier
+
+#### Best Practices
+
+1. Data Protection
+
+..* AWS customers maintain full control over their data.
+
+..* AWS makes it easier to encrypt data and manage keys, including key rotation which can be easily automated natively by AWS or maintained by the customer.
+
+..* Detailed logging is available that contains important content such as file access and changes.
+
+..* AWS has designed storage systems for exceptional resilience.
+
+..* Versioning, which can be a part of a larger data lifecycle management process, can protect against accidental overwrites, deletes and similar harm.
+
+..* AWS never initiates the movement of data between regions. Content placed in a region will remain in that region unless customer explicitly enables a features or leverages a service that provides that functionality.
+
+#### Questions to ask
+
+1. Data Protection
+
+..* How are you encrypting and protecting data at rest?
+
+..* How are you encrypting and protecting data in transit?
+
+2. Privilege Management
+
+..* How are you protecting access to and use of the AWS root account credentials?
+
+..* How are you defining roles and responsibilities of system users to control human access to the AWS management console and APIs?
+
+..* How are you limiting automated access to AWS resources?
+
+..* How are you managing keys and credentials?
+
+3. Infrastructure protection
+
+..* How are you enforcing network and host-level boundary protection?
+
+..* How are you securing access to subnets?
+
+..* How are you securing access to accounts on EC2 instance? Is it just the ec2-user account or are there multiple accounts?
+
+..* Are you using bastian hosts or NAT Gateway?
+
+..* How are you enforcing AWS level protection? Are there multiple users with console level access? Are there multi-factor authentication enabled for all the users? Do you have strong password protection policies?
+
+..* How are you protecting the integrity of the operating system? Are windows instances getting anti-virus updates? Are the operating systems hardened?
+
+4. Detective Control
+
+..* How are you capturing and analyzing AWS logs?
+
+..* Do you have cloudtrail turned on, in each region?
+
+..* Are you using a log management plans?
+
+#### Key AWS Services
+
+1. Data Protection - ELB, EBS, S3, RDS
+
+2. Privilege Management - IAM, MFA
+
+3. Infrastructure protection - VPC
+
+4. Detective Control - CloudTrail, CloudWatch, Config
+
+### Pillar 2: Reliability
+
+Reliability covers the ability of a system to recover from service or infrastructure outages/ disruptions as well as the ability to dynamically acquire computing resources to meet demand.
+
+#### Design Principles
+
+1. Test recovery procedures - Introduce failure into the environment and test how the the system recovers
+
+2. Automatically recover from failure - Use KPIs to notify when performance thresholds are breached. This allows for automatic reovery from failures.
+
+3. Scale horizontally to increase aggregate system availability - Scale out rather than scale up, this can ensure one system does not become a block point.
+
+4. Stop guessing capacity - Use autoscaling to meet demand as needed instead of underprovisioning or over provisioning.
+
+#### Definition
+
+1. Foundations - AWS takes care of most of the foundational limits. However there are service limits on AWS to ensure that customers do not overprovision resources. Most services have a service limit which can be extended by contacting customer support.
+
+2. Change management - You need to be aware of how change affects a system so that you can plan proactively around it. Monitoring allows you to detect any changes to the environment and react. Cloudwatch can be used to monitor the environment and services such as autoscaling to automate change in response to changes on production environment.
+
+3. Failure Management - With cloud, you should always architect your systems with the assumptions that failure will occue. You should become aware of these failures, how they occured, how to respond to them and then plan on how to prevent these from happening again.
+
+#### Best Practices
+
+1. Foundations - 
+
+..* How are you managing AWS service limits for your account?
+
+..* Are you aware of the service limits on AWS?
+
+..* How are you planning your network topology on AWS?
+
+..* Do you have an escalation path to address issues?
+
+2. Change management - 
+
+..* How does your system adapt to changes in demand?
+
+..* How are you monitoring AWS resources?
+
+..* How are you executing change management?
+
+3. Failure Management - 
+
+..* How are you backing up your data?
+
+..* How does your system withstand component failures?
+
+..* How are you planning for recovery?
+
+#### Key AWS Services
+
+1. Foundations - IAM, VPC
+2. Change Management - CloudTrail
+3. Failure Management - CloudFormation
+
+### Pillar 3: Performance Efficiency
+
+Focuses on how to use computing resources efficiently to meet requirements and how to maintain that efficiency as demand changes and technology evolves.
+
+#### Design Principles
+
+1. Democratize advanced techologies - Use technologies that can be implemented by anyone without the need for specialized skillsets. Like use AWS machine learning services instead of getting a machine learning engineer who might be difficult to find.
+
+2. Go global in minutes - Use cloudformation templates to deploy the entire infrastructure in a new region within minutes.
+
+3. Use serverless architecture
+
+4. Experiment more often
+
+#### Definition
+
+1. Compute - When architecting your system it is important to choose the right kind of server.
+
+Questions?
+
+..* How do you select the appropriate instance type for your system?
+
+..* How do you ensure that you continue to have the most appropriate instance type as new instance types and features are introduced?
+
+..* How do you monitor your instances post launch to ensure they are performing as expected?
+
+..* How do you ensure that the quality of your instances match demand?
+
+2. Storage - Optimal storage solutions for environment depends on number of factors - 
+
+..* Access methods - Block,file or object
+
+..* Patterns of Access - Random or sequential
+
+..* Throughput required
+
+..* Frequency of Access - Online, Offline or Archival
+
+..* Frequency of Update - Worm, Dynamic
+
+..* Availability Constraints
+
+..* Durability Constraints
+
+Questions?
+
+..* Gow do you select the appropriate storage solution for your system?
+
+..* How do you ensure that you continue to have the most appropriate storage solution as new storage solutions and features are launched?
+
+..* How do you monitor your storage solution to ensure it is performing as expected?
+
+..* How do you ensure that the capacity and throughput of your storage solutions matches demand?
+
+3. Database - Optimal database solution depends on a number of factors - Is database consistency needed? Is high availability needed? NoSQL needed?
+
+Questions?
+
+..* How do you select the appropriate database solution for your system?
+
+..* How do you ensure that you continue to have the most appropriate database solution and features as new database solution and features are launched?
+
+..* How do you monitor your databases to ensure performance is as expected?
+
+..* How do you ensure the capacity and throughput of your database matches demand?
+
+4. Space-Time Continuum - When you are building your infrastructure ther is a trade-off wher space is used to reduce processing time or time is used to reduce space. You can cache data to reduce time.
+
+Questions?
+
+..* How do you select the appropriate proximity and caching solutions for your system?
+
+..* How do you ensure that you continue to have the most appropriate proximity and caching solutions as new solutions are launched?
+
+..* How do you monitor your proximity and caching solutions to ensure performance is as expected?
+
+..* How do you ensure that the proximity and caching solutions you have matches demand?
+
+#### Key AWS Services
+
+1. Compute - Autoscaling
+
+2. Storage - EBS, S3, Glacier
+
+3. Database - RDS, DynamoDB, Redshift
+
+4. Space-time tradeoff - Cloudfront, Elasticache, Direct Connect, RDS Read Replica
+
+### Pillar 4: Cost Optimization
+
+Allows to pay the lowest price possible while still achieving your business objectives?
+
+#### Design Principles
+
+1. Transparently attribute expenditure - Makes it easier to see who is consuming what, and check how to optimize
+
+2. Use managed services to reduce cost of ownership - Since these run at a cloud level, they are cheaper to use. Also easier to manage since we dont have to manage the underlying hardware.
+
+3. Trade capital expense for operating expense - 
+
+4. Benefit from economies of scale - 
+
+5. Stop spending money on  data center operations
+
+#### Definitions
+
+1. Matched supply and demand - Optimally align supply and demand. Dont over provision or under provision. Use autoscaling and serverless services to only provision resources when needed. Services such as CloudWatch can also help to keep track as to what demand is.
+
+Questions?
+
+..* How do you make sure your capacity matches but does not substantially exceed what you need?
+
+..* How are you optimizing your usage of AWS services?
+
+2. Cost effective resources - Using the correct instance type can be key to cost savings. A well architected system will use the most cost effective resources to meet the end goal.
+
+Questions?
+
+..* Have you selected the appropriate resource types to meet your cost targets?
+
+..* Have you selected the appropriate pricing model to meet your cost targets?
+
+..* Are there managed services that you can use to improve your ROI?
+
+3. Expenditure awareness - Be aware of what is spent on the cloud. It is easier to spend and provision resources and this could lead to a lack of awareness on the real expenses. Use cost allocation tags to track spending. Billing alerts as well as consolidated billing can also be used.
+
+Questions?
+
+..* What access controls and procedures do you have in place to govern AWS costs?
+
+..* How are you monitoring usage and spending?
+
+..* How do you decommission resources that are no longer needed or stop resources that are temporarily not needed?
+
+..* How do you consider data transfer charges while designing the architecture?
+
+4. Optimizing over time - AWS moves fast! There are new services launched all the time. A service which existed when we first provisioned the resources might not be the best service to use now. So always keep track of changes made to AWS and use the best service currently available for the use case.
+
+Questions?
+
+..* How do you manage and consider the adoption of new services
+
+#### Key AWS Services
+
+1. Matched supply and demand - Autoscaling
+
+2. Cost effective resources - EC2, AWS Trusted Advisor
+
+3. Expenditure awareness - Cloudwatch, SNS
+
+4. Optimising over time - AWS Trusted Advisor
+
+### Pillar 5: Operational Excellence
+
+Operational Excellence includes operational practices and procedures used to manage production workloads. This includes how planned changes are executed, as well as responses to unexpected operational events.
+
+Change execution and responses should be automated. All processes and procedures of operational excellence should be documented, tested and regularly reviewed.
+
+#### Design Principles
+
+1. Perform operations with code
+
+2. Align operations process to business objectives - Collect metrics which show that business objectives are met
+
+3. Make regular, small and incremental changes
+
+4. Test for responses to unexpected events - Test workloads like netflix
+
+5. Learn from operational events and failures.
+
+6. Keep operations procedures current.
+
+#### Definition
+
+1. Preparation - Effective preparation is required to drive operational excellence.
+
+Operations checklists will ensure that workloads are ready for production operation and prevent unintentional production promotion without effective preparation. Workloads should have 
+..* Runbooks - operations guidance that operations teams can refer to so they can perform normal daily tasks.
+
+..* Playbooks - Guidance for responding to unexpected operational events. Playbooks should include response plans as well as escalation paths and stakeholder notifications.
+
+Keep all your documentation updated - Application designs, environment configurations, resource configurations, response plans, mitigration plans.
+
+CloudFormation can be used to ensure that environments contain required resources when deployed in production and that the configuration of the environment is based on tested best practices, which reduces the opportunity for human error.
+
+Autoscaling must be implemented to allow workloads to automatically respond when business related event affect operational needs.
+
+Use AWS Config rules feature to create mechanisms to automatically track and respond to changes in AWS workloads.
+
+Use features like tagging to make sure all resources in a workload can be easily identified when needed during operations and responses.
+
+Questions?
+
+..* What best practices for cloud operations are you using?
+
+..* How are you doing configuration management for your workload?
+
+2. Operation - Operations should be standardized and manageable on a routing basis. Changes should not be large and infrequent, they should not require scheduled downtime and they should not require manual execution. A wide range of logs and metrics that are based on key operational indicators for a workload should be collected and reviewed to ensure continous operations.
+
+In AWS, continuous integration/ continuous deployment pipeline can be setup. Release management processes whether manual or automated should be tested and be based on small incremental changes and tracked versions. You should be able to revert changes that introduce operational issues without causing operational impact.
+
+Routing operations should be automated. Manual processes for deployments, release management etc should be avoided.
+
+Rollbacks are more difficult in large changes and failing to have a rollback plan or the ability to mitigate failure impacts will prevent continuity of operations. Align monitoring to business needs, so that the responses are effective at maintaining business continuity.
+
+
+
+Questions?
+
+..* How are you evolving your workload while minimizing the impact of change?
+
+..* How do you monitor your workload to ensure it is operating as expected?
+
+3. Response
+
+Responses to unexpected operational events should be automated. This is not just for alerting, but also for mitigation, remediation, rollback and recovery. Alerts should be timely and should invoke escalations when responses are not adequate to mitigate the impact of operational events. Quality assurance mechanisms should be in place to automatically rollback failed deployments. Responses should follow a pre-defined playbook that includes stakeholders, the escalation process and procedures. Escalation paths should be defined and include both functional and hierarchical escalation capabilities. Hierarchical escalation should be automated and escalated priority should result in stakeholder notifications.
+
+In AWS, scheduled mechamisms ensure both appropriate alerting and notification in response to unplanned operational events as well as automated responses.
+
+Questions?
+
+..* How do you respond to unplanned operational events?
+
+..* How is escalation managed when responding to unplanned operational events?
+
+#### Best Practices
+
+
+#### Key AWS Services
+
+
+#### Resources
+

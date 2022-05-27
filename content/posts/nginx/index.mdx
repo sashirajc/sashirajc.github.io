@@ -1,0 +1,72 @@
+---
+title: Nginx
+date: 2018-11-24
+description: Nginx guide
+tags:
+  - Hosting
+---
+An overview of Nginx web server. Analysis of the trade-offs between Apache and Nginx.Basic configurations to setup Nginx!
+<!--more-->
+## Nginx Overview
+
+Nginx is an open source software for web serving, reverse proxying, caching, load balancing etc. It started out as a web server for maximum performance and stability.
+
+### Nginx vs Apache
+
+Apache works in a prefork mode. It has a set number of processes, and each process can serve a single request regardless of type of request (pdf, png, html).
+
+Nginx deals with requests asynchronously and hence a single Nginx process can serve multiple requests concurrently with the number of requests depending on the system resources available.
+
+Nginx cant embed server side languages inside its process, because of the asynchronous nature. Server side languages must hence run on a separate server/process and must be proxied by nginx. This works well for languages like nodeJS and Python which have their own servers.
+
+Nginx is also less resource hungry since it does not deal with the server side language processing. PHP processess the server side language for each request even if the request is for a static file.
+
+Nginx serves static resources faster
+Nginx can handle more concurrent requests compared to Apache since it can handle multiple requests on the same thread.
+
+Nginx requests are interpreted as URI locations while Apache interprets requests as file locations
+
+### Run Nginx as a service
+
+Use systemctl to run nginx on top of it. This can ensure that nginx is automatically started when the virtual machine or EC2 instance starts up.
+
+### Nginx Configuration
+
+1. Context
+Block of different directives which are scoped with {} and they inherit directives from their parent contexts.
+
+2. Directive
+Individual configuration statements with name and value
+
+3. Create a virtual host
+
+Events context is always required
+Server contexts are required to configure a virtual host to serve requests. Server context is always inside the http context.
+
+Port - to listen is specified inside server context.
+Server name - domain name with wildcards (optional)
+root - Root path from which nginx will serve requests
+
+File types can be specified for different file formats, this goes inside the types context
+
+4. Location blocks
+
+Location blocks can intercept requests to certain uris and redirect them, or do something else. There are many types of matching - Prefix match, Exact match, Regex match (case sensitive as well as case insensitive), preferential prefix (same as prefix, but more important than regex)
+
+Location blocks have differnet priorities if different types of matches exist on the same file. Exact Match > Preferential prefix match > regex match > prefix match
+
+5. Variables can be used to store values. Scoping rules apply to variables.
+
+6. Rewrites and redirects can be used with regular expressions to catch certain requests and either redirect the browser to the new location or rewrite the request to provide the browser with a different response.
+
+7. Try files and named locations can be used to try a location and redirect to a different location if the first location does not exist.
+
+8. Logging can be configured on the nginx server to log all the requests coming to the server.
+
+9. PHP Processing using FastCGI PHP FPM. Nginx functions as a reverse proxy by running PHP code through the FPM process.
+
+10. Worker Processes - Worker processes can be spawned to handle requests. Nginx is asynchronous, so more number of worker process does not result in better performance. But for max performance, we can have as many process as number of cores on the machine. This can be set by auto option. Worker connections can also be configured to the maximum number of files that the machine can open. To get the maximum concurrent requests that can be handled by the user.
+
+11. Buffers and timeouts - Buffers are used to allocate memory to accept incoming requests and data long with the request. Any request larger than the buffer size will be refused by the server. This can be a safety mechanism against receiving a very large request which can crash the server. Timeouts are used to control how long the server will keep the connection open or for other similar operations.
+
+12. Dynamic modules can be loaded to nginx to add additional capabilities like image filtering etc

@@ -1,0 +1,24 @@
+---
+title: Forced Windows Update Blocker
+date: 2018-07-19
+tags:
+  - OS
+---
+
+Enough with the rant, let's do something about it!
+
+In my previous blog I wrote about my latest misadventure with Windows update. I decided to do something about it.
+
+On digging a little bit more, I discovered that there is a specific service which runs the windows updater. You can find it inside the Windows services manager by the name - wuauserv. Windows update service is also notorious for eating up your RAM and slowing down your computer when it is busy checking for updates and installing it. This can be especially bad on older machines like mine.
+
+So I came up with simple script which checks if Windows Update Service is running. If it finds Windows Update service running in the background, it would shut down the service. I used the following 3 libraries to get my work done. The `os` package to check if the computer was indeed running windows. The `cmd` package to run windows commands on the NodeJS runtime. I will talk about the third package in a bit. I ran into a problem with the `cmd` package very early on in my venture. 
+
+It so happens that to stop the Windows Update Service, you need admin privileges. While I manually stop the service from the services manager, it uses my admin user's rights to shut it down, the same does not extend to code that is running on the computer. This is a good feature to have, to stop malicious code from executing without the user's knowledge. But I found it quite annoying as I could not easily figure out how to get around this issue. All I had to do was elevate the process and seek admin's permission to execute the code.
+
+After a bit of experimenting and digging on stackoverflow I came across `node-windows` node package, which could do just that. `node-windows` has a special API which can run a windows command with elevated privileges. The downside of this is an annoying pop-up asking for the user's admin rights to execute the code. This would allow the code to execute and shut down the Windows update service if it is running. I decided to retain both `cmd` and `node-windows` package so I could avoid asking for elevated privileges if Windows Update service is not running. This way I could avoid bothering the user if there is no need to shut down windows update in the first place.
+
+There is a `exe` version of the code so it can also be run on machines without the node runtime. I'm exploring options to set it up such that windows can run this exe file at a set interval without any intervention from the user.
+
+** This works with Windows 10. Untested for Windows 11**
+
+Github link to the repo - https://github.com/sashirajc/WindowsUpdateDisabler

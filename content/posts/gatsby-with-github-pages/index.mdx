@@ -1,0 +1,52 @@
+---
+title: Building a Gatsby blog with Github pages
+date: 2022-05-28
+description: Building a Gatsby blog with Github pages
+tags:
+  - Infrastructure
+---
+
+My previous blog was built using Jekyll. But lack of experience working
+with Ruby made it quite challenging to run Jekyll locally and experiment 
+with the blog. I wanted to have more control over how the blog looks
+and feels, so I decided to move it to a platform that I had more
+experience with. 
+
+Enter Javascript. 
+
+I went scouting for a good platform to migrate to and discovered Gatsby. 
+
+It was minimalistic, had plenty of support for blogging and seemed 
+quite easy to adapt and migrate to. 
+
+This is a great blog theme to start - https://github.com/LekoArts/gatsby-starter-minimal-blog
+
+To adapt the Gatsby site update a few places.
+
+1. Update the `gatsby-config.js` file to add links to your own social media
+sites. You could also update the plugins if needed.
+
+2. For every blog article you have on the Jekyll site, create a new folder inside 
+the `/content/posts` folder. Create a new `index.mdx` file inside each folder. 
+
+This file holds the main contents of each blog post.
+
+3. Next, update the `/content/pages/about/index.mdx` file to update the "about me" page.
+
+4. You will need gh-pages package to deploy. Create a new script 
+in the `packages.json` file called `deploy` 
+
+>       "scripts": {
+>        "deploy": "gatsby build && gh-pages -d public"
+>       },
+>
+
+6. Run `npm run deploy` to deploy your site. This will create a new branch 
+called `gh-pages` and this branch is used by Github pages to build the site.
+
+7. If you would like to debug the deployment script use `NODE_DEBUG=gh-pages npm run deploy`
+
+Finally, to update the Github pages site, go to the repository settings. 
+Go to the pages tab and change the branch in the source section.
+
+Give a few minutes for Github to rebuild the site. 
