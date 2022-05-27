@@ -5735,7 +5735,7 @@
   "resolved" "https://registry.npmjs.org/eslint-visitor-keys/-/eslint-visitor-keys-2.1.0.tgz"
   "version" "2.1.0"
 
-"eslint-webpack-plugin@^2.6.0":
+"eslint-webpack-plugin@^2.4.3 || ^3", "eslint-webpack-plugin@^2.6.0":
   "integrity" "sha512-V+LPY/T3kur5QO3u+1s34VDTcRxjXWPUGM4hlmTb5DwVD0OQz631yGTxJZf4SpAqAjdbBVe978S8BJeHpAdOhQ=="
   "resolved" "https://registry.npmjs.org/eslint-webpack-plugin/-/eslint-webpack-plugin-2.6.0.tgz"
   "version" "2.6.0"
@@ -5747,7 +5747,7 @@
     "normalize-path" "^3.0.0"
     "schema-utils" "^3.1.1"
 
-"eslint@*", "eslint@^2 || ^3 || ^4 || ^5 || ^6 || ^7.2.0 || ^8", "eslint@^3 || ^4 || ^5 || ^6 || ^7 || ^8", "eslint@^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0", "eslint@^5.0.0 || ^6.0.0 || ^7.0.0", "eslint@^7.0.0 || ^8.0.0", "eslint@^7.1.0", "eslint@^7.32.0", "eslint@^7.5.0", "eslint@^7.5.0 || ^8.0.0", "eslint@>=5":
+"eslint@*", "eslint@^2 || ^3 || ^4 || ^5 || ^6 || ^7.2.0 || ^8", "eslint@^3 || ^4 || ^5 || ^6 || ^7 || ^8", "eslint@^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0", "eslint@^5.0.0 || ^6.0.0 || ^7.0.0", "eslint@^7.0.0 || ^8.0.0", "eslint@^7.1.0", "eslint@^7.18.0 || ^8", "eslint@^7.32.0", "eslint@^7.5.0", "eslint@^7.5.0 || ^8.0.0", "eslint@>=5":
   "integrity" "sha512-VHZ8gX+EDfz+97jGcgyGCyRia/dPOd6Xh9yPv8Bl1+SoaIwD+a/vlrOmGRUyOYu7MwUhc7CxqeaDZU13S4+EpA=="
   "resolved" "https://registry.npmjs.org/eslint/-/eslint-7.32.0.tgz"
   "version" "7.32.0"
@@ -6514,6 +6514,13 @@
   "resolved" "https://registry.npmjs.org/gatsby-plugin-disqus/-/gatsby-plugin-disqus-1.2.4.tgz"
   "version" "1.2.4"
 
+"gatsby-plugin-eslint@^4.0.2":
+  "integrity" "sha512-fNLmtu8zgkrdifF9tnbtzmraJzSulhLo868FObCkArfjXB4PLxguxfBWKuJ6PMeZcSIIA4SgouCXHo2hoA12Pw=="
+  "resolved" "https://registry.npmjs.org/gatsby-plugin-eslint/-/gatsby-plugin-eslint-4.0.2.tgz"
+  "version" "4.0.2"
+  dependencies:
+    "webpack-merge" "^5.8.0"
+
 "gatsby-plugin-feed@^4.12.1":
   "integrity" "sha512-wI8epzJ6G53wIOHc9lDv3TdckgIx4v9ZyAfbJfGo6bzHPgg8wVD3aW8iUZYwO4ca2d23boUEsrdiRhpPDoLqiw=="
   "resolved" "https://registry.npmjs.org/gatsby-plugin-feed/-/gatsby-plugin-feed-4.13.0.tgz"
@@ -6799,7 +6806,7 @@
     "@babel/core" "^7.15.5"
     "@babel/runtime" "^7.15.4"
 
-"gatsby@^2.0.0 || ^3.0.0", "gatsby@^2.0.0 || ^3.0.0 || ^4.0.0", "gatsby@^2.0.0 || ^3.0.0 || ^4.0.0 || ^5.0.0", "gatsby@^4.0.0", "gatsby@^4.0.0-next", "gatsby@^4.12.1":
+"gatsby@^2 || ^3 || ^4", "gatsby@^2.0.0 || ^3.0.0", "gatsby@^2.0.0 || ^3.0.0 || ^4.0.0", "gatsby@^2.0.0 || ^3.0.0 || ^4.0.0 || ^5.0.0", "gatsby@^4.0.0", "gatsby@^4.0.0-next", "gatsby@^4.12.1":
   "integrity" "sha512-RLHPyjF7fdMqoq77kE6O/XLVA8ccRd3CrzncHQ/JhtI8+ZvyUN8gzdVfcLcXDd2KIBQvMH7VivEiPWWZPlWuzw=="
   "resolved" "https://registry.npmjs.org/gatsby/-/gatsby-4.13.1.tgz"
   "version" "4.13.1"
