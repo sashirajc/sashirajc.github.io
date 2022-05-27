@@ -6,10 +6,12 @@ import Layout from "./layout"
 import ItemTags from "./item-tags"
 import Seo from "./seo"
 import PostFooter from "./post-footer"
+import Disqus from 'gatsby-plugin-disqus'
 
 type PostProps = {
   data: {
     post: {
+      id: string,
       slug: string
       title: string
       date: string
@@ -68,6 +70,11 @@ const Post = ({ data: { post } }: PostProps) => (
     >
       <MDXRenderer>{post.body}</MDXRenderer>
     </section>
+    <Disqus 
+      identifier={post.id}
+      title={post.title}
+      url={`${location.host}${location.pathname}`}
+    />
     <PostFooter post={post} />
   </Layout>
 )
