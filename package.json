@@ -31,7 +31,9 @@
     "react-dom": "^18.0.0"
   },
   "devDependencies": {
+    "babel-eslint": "^10.1.0",
     "cross-env": "^7.0.3",
+    "eslint-plugin-react": "^7.30.0",
     "gatsby-plugin-eslint": "^4.0.2",
     "gh-pages": "^4.0.0",
     "kill-port": "^2.0.0",

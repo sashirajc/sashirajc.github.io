@@ -1,27 +1,22 @@
-module.exports = {
-    env: {
-      commonjs: true,
-      node: true,
-      browser: true,
-      es6: true,
-      jest: true,
-    },
-    extends: ["eslint:recommended", "plugin:react/recommended"],
-    globals: {},
-    parser: "babel-eslint",
-    parserOptions: {
-      ecmaFeatures: {
-        jsx: true,
-      },
-      ecmaVersion: 2018,
-      sourceType: "module",
-    },
-    plugins: ["react", "import", "react-hooks"],
-    ignorePatterns: ["node_modules/"],
-    rules: {},
-    settings: {
-      react: {
-        version: "latest", // "detect" automatically picks the version you have installed.
-      },
-    },
-  };
+// .eslintrc
+
+// Gatsby's required rules
+module.config = {
+  "parser": "babel-eslint", // uses babel-eslint transforms
+  "settings": {
+    "react": {
+      "version": "detect" // detect react version
+    }
+  },
+  "env": {
+    "node": true // defines things like process.env when generating through node
+  },
+  "extends": [
+    "eslint:recommended", // use recommended configs
+    "plugin:react/recommended"
+  ],
+  "rules": {
+    "no-anonymous-exports-page-templates": "warn",
+    "limited-exports-page-templates": "warn"
+  }
+}

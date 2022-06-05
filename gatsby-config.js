@@ -24,7 +24,7 @@ module.exports = {
     // You can also add new values here to query them like usual
     // See all options: https://github.com/LekoArts/gatsby-themes/blob/main/themes/gatsby-theme-minimal-blog/gatsby-config.js
     siteTitle: `Sashiraj Chandrasekaran`,
-    siteTitleAlt: `Personal thoughts`,
+    siteTitleAlt: `Sashiraj Chandrasekaran`,
     siteHeadline: `Thoughts on code, travel and history`,
     siteUrl: `https://sashirajc.github.io`,
     siteDescription: `Personal blog of Sashiraj Chandrasekaran. Opinions are my own.`,
@@ -160,19 +160,6 @@ module.exports = {
             title: `Minimal Blog - @lekoarts/gatsby-theme-minimal-blog`,
           },
         ],
-      },
-    },
-    {
-      resolve: "gatsby-plugin-eslint",
-      options: {
-        // Gatsby required rules directory
-        rulePaths: [gatsbyRequiredRules],
-        // Default settings that may be ommitted or customized
-        stages: ["develop"],
-        extensions: ["js", "jsx", "ts", "tsx"],
-        exclude: ["node_modules", ".cache", "public"],
-        // Any additional eslint-webpack-plugin options below
-        // ...
       },
     },
     {
