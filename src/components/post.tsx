@@ -48,7 +48,7 @@ const Post = ({ data: { post } }: PostProps) => (
       canonicalUrl={post.canonicalUrl}
     />
     <Heading as="h1" variant="styles.h1">
-      {post.title}-------{post.id}
+      {post.title}
     </Heading>
     <p sx={{ color: `secondary`, mt: 3, a: { color: `secondary` }, fontSize: [1, 1, 2] }}>
       <time>{post.date}</time>
@@ -71,9 +71,9 @@ const Post = ({ data: { post } }: PostProps) => (
       <MDXRenderer>{post.body}</MDXRenderer>
     </section>
     <Disqus 
-      identifier={post.id}
+      identifier={post.slug}
       title={post.title}
-      url={`${window.location.host}${window.location.pathname}`}
+      url={post.canonicalUrl}
     />
     <PostFooter post={post} />
   </Layout>
