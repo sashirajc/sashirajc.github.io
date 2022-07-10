@@ -3,20 +3,6 @@ require(`dotenv`).config({
 })
 
 const path = require("path");
-// Get paths of Gatsby's required rules, which as of writing is located at:
-// https://github.com/gatsbyjs/gatsby/tree/fbfe3f63dec23d279a27b54b4057dd611dce74bb/packages/
-// gatsby/src/utils/eslint-rules
-const gatsbyRequiredRules = path.join(
-  process.cwd(),
-  "node_modules",
-  "gatsby",
-  "dist",
-  "utils",
-  "eslint-rules"
-);
-
-
-const shouldAnalyseBundle = process.env.ANALYSE_BUNDLE
 
 module.exports = {
   siteMetadata: {
@@ -196,15 +182,6 @@ module.exports = {
       options: {
         shortname: `sashirajc-github-io`
       }
-    },
-    `gatsby-plugin-gatsby-cloud`,
-    shouldAnalyseBundle && {
-      resolve: `gatsby-plugin-webpack-bundle-analyser-v2`,
-      options: {
-        analyzerMode: `static`,
-        reportFilename: `_bundle.html`,
-        openAnalyzer: false,
-      },
     },
   ].filter(Boolean),
 }
