@@ -1,0 +1,49 @@
+---
+title: VI Cheat Sheet
+date: 2022-07-31
+tags: 
+  - Coding
+---
+
+This is a quick reference to using VI professionally. VI is a popular text editor that comes built-in on most unix based operating systems. 
+
+###### Create a new file and open it
+`vi <newfilename.txt>`
+
+###### Open an existing filename
+`vi <existingfilename.txt>`
+
+###### Switch to edit mode
+Press `i` to insert before current character 
+Press `a` to insert after current character
+Press `O` to start a new line below current line
+
+###### Switch to command mode
+Press `Esc` to switch back to command mode
+
+###### Basic commands
+1. `x` - Delete a character
+2. `dd` - Delete a line
+3. `r` - Replace a character
+4. `R` - Overwrite text, press `<Esc>` to end
+5. `:set nu` - Display line numbers
+6. `:wq!` - Save and quit
+7. `:q!` - Quit
+8. `e` - Move to end of current word
+9. `$` - Move to end of current line
+10. `^` - Move to beginning of current line
+11. `+` - Move to beginning of next line
+12. `-` - Move to beginning of previous line
+13. `G` - Go to last line of the file
+14. `:n` - Go to line n (:10 for line 10)
+15. `u` - Undo last single change
+16. `~` - Change letter's case
+17. `yy` - Copy the current line
+18. `6yy` - Copy six lines from current line
+19. `P` - Paste the text after the cursor position
+20. `/text` - Search down for 'text'
+21. `?text` - Search up for 'text'
+22. `n` - Toggle through search results
+
+###### Detailed cheatsheet - 
+https://staff.washington.edu/rells/R110/
